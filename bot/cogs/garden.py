@@ -1,4 +1,4 @@
-import discord
+﻿import discord
 from discord.ext import commands
 from discord import app_commands
 from config import SEEDS, GARDENS
@@ -82,7 +82,7 @@ class PlotSelect(discord.ui.Select):
                 coins=user["coins"] + seed["reward"]
             )
             await interaction.response.send_message(
-                f"🎉 **{interaction.user.display_name}** собрал урожай: {seed['emoji']} **{seed['name']}**! +{seed['reward']}🪙"
+                f"🎉 **{interaction.user.display_name}** собрал урожай: {seed['emoji']} **{seed['name']}**! +{seed['reward']} TON"
             )
 
 
@@ -212,7 +212,7 @@ class Garden(commands.Cog):
             color=0x27ae60
         )
         embed.set_author(name=interaction.user.display_name, icon_url=interaction.user.display_avatar.url)
-        embed.set_footer(text=f"💰 {user['coins']}🪙 | 🪣 Леек: {user['watering_cans']}")
+        embed.set_footer(text=f"💰 {user['coins']} TON | 🪣 Леек: {user['watering_cans']}")
         await interaction.response.send_message(
             embed=embed,
             view=GardenView(interaction.user.id, user["plots"], user["inventory"])

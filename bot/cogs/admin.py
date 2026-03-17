@@ -1,4 +1,4 @@
-import discord
+﻿import discord
 from discord.ext import commands
 from discord import app_commands
 from datetime import datetime, date
@@ -30,9 +30,9 @@ class Admin(commands.Cog):
         await update_user(member.id, coins=new_balance)
 
         if amount > 0:
-            msg = f"💰 **{interaction.user.display_name}** выдал **{amount}🪙** игроку **{member.display_name}**! Баланс: {new_balance}🪙"
+            msg = f"💰 **{interaction.user.display_name}** выдал **{amount} TON** игроку **{member.display_name}**! Баланс: {new_balance} TON"
         else:
-            msg = f"💸 **{interaction.user.display_name}** снял **{abs(amount)}🪙** у **{member.display_name}**. Баланс: {new_balance}🪙"
+            msg = f"💸 **{interaction.user.display_name}** снял **{abs(amount)} TON** у **{member.display_name}**. Баланс: {new_balance} TON"
 
         await interaction.response.send_message(msg)
 
@@ -52,7 +52,7 @@ class Admin(commands.Cog):
         await ensure_user(member.id)
         await update_user(member.id, coins=amount)
         await interaction.response.send_message(
-            f"💰 **{interaction.user.display_name}** установил баланс **{member.display_name}** → **{amount}🪙**"
+            f"💰 **{interaction.user.display_name}** установил баланс **{member.display_name}** → **{amount} TON**"
         )
 
     @setcoins.error
@@ -68,7 +68,7 @@ class Admin(commands.Cog):
         if user.get("last_daily") == today:
             await interaction.response.send_message(
                 f"⏳ Ты уже получал бонус сегодня! Возвращайся завтра.\n"
-                f"Баланс: {user['coins']}🪙",
+                f"Баланс: {user['coins']} TON",
                 ephemeral=True
             )
             return
@@ -76,8 +76,8 @@ class Admin(commands.Cog):
         new_balance = user["coins"] + DAILY_REWARD
         await update_user(interaction.user.id, coins=new_balance, last_daily=today)
         await interaction.response.send_message(
-            f"🎁 **{interaction.user.display_name}** получил ежедневный бонус: **+{DAILY_REWARD}🪙**! "
-            f"Баланс: {new_balance}🪙"
+            f"🎁 **{interaction.user.display_name}** получил ежедневный бонус: **+{DAILY_REWARD} TON**! "
+            f"Баланс: {new_balance} TON"
         )
 
 

@@ -1,4 +1,4 @@
-import discord
+﻿import discord
 from discord.ext import commands
 from discord import app_commands
 from config import SEEDS, GARDENS
@@ -16,7 +16,7 @@ class Inventory(commands.Cog):
 
         embed = discord.Embed(title="🎒 Инвентарь", color=0xe67e22)
         embed.set_author(name=interaction.user.display_name, icon_url=interaction.user.display_avatar.url)
-        embed.add_field(name="💰 Монеты", value=f"{user['coins']}🪙", inline=True)
+        embed.add_field(name="💰 Монеты", value=f"{user['coins']} TON", inline=True)
         embed.add_field(name="🪣 Лейки", value=str(user["watering_cans"]), inline=True)
         embed.add_field(name="🏡 Огород", value=f"{garden['emoji']} {garden['name']}", inline=True)
 
@@ -56,7 +56,7 @@ class Inventory(commands.Cog):
             color=0x3498db
         )
         embed.set_thumbnail(url=interaction.user.display_avatar.url)
-        embed.add_field(name="💰 Монеты", value=f"{user['coins']}🪙", inline=True)
+        embed.add_field(name="💰 Монеты", value=f"{user['coins']} TON", inline=True)
         embed.add_field(name="🪣 Лейки", value=str(user["watering_cans"]), inline=True)
         embed.add_field(name="🌰 Семян в инвентаре", value=str(total_seeds), inline=True)
         embed.add_field(name="🏡 Огород", value=f"{garden['emoji']} {garden['name']} ({len(plots)} грядок)", inline=False)

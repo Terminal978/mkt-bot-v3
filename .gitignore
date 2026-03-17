@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 *.db
 *.db-journal
 __pycache__/
 *.pyc
 .env
+=======
+*.db
+*.db-journal
+__pycache__/
+*.pyc
+.env
+>>>>>>> 2d71b26ac8256f9e449e430bea05a0cd25c05fe2

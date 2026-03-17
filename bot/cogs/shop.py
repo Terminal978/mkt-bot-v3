@@ -1,4 +1,4 @@
-import discord
+﻿import discord
 from discord.ext import commands
 from discord import app_commands
 from config import SEEDS, GARDENS, WATERING_CAN_PRICE
@@ -10,8 +10,8 @@ class SeedSelect(discord.ui.Select):
         self.buyer_id = user_id
         options = [
             discord.SelectOption(
-                label=f"{s['name']} — {s['price']}🪙",
-                description=f"Поливов: {s['watering_needed']} | Награда: {s['reward']}🪙",
+                label=f"{s['name']} — {s['price']} TON",
+                description=f"Поливов: {s['watering_needed']} | Награда: {s['reward']} TON",
                 value=seed_id,
                 emoji=s["emoji"]
             )
@@ -35,7 +35,7 @@ class SeedSelect(discord.ui.Select):
         inv[seed_id] = inv.get(seed_id, 0) + 1
         await update_user(interaction.user.id, coins=user["coins"] - seed["price"], inventory=inv)
         await interaction.response.send_message(
-            f"🛒 **{interaction.user.display_name}** купил {seed['emoji']} **{seed['name']}**! Баланс: {user['coins'] - seed['price']}🪙"
+            f"🛒 **{interaction.user.display_name}** купил {seed['emoji']} **{seed['name']}**! Баланс: {user['coins'] - seed['price']} TON"
         )
 
 
@@ -46,7 +46,7 @@ class GardenSelect(discord.ui.Select):
         current_idx = garden_order.index(current_garden)
         options = []
         for g_id, g in GARDENS.items():
-            label = f"{g['name']} ({g['slots']} грядок) — {g['price']}🪙"
+            label = f"{g['name']} ({g['slots']} грядок) — {g['price']} TON"
             if g_id == current_garden:
                 label = "✅ " + label
             options.append(discord.SelectOption(
@@ -92,7 +92,7 @@ class ShopView(discord.ui.View):
         self.add_item(SeedSelect(user_id))
         self.add_item(GardenSelect(user_id, current_garden))
 
-    @discord.ui.button(label="🪣 Купить лейку (50🪙)", style=discord.ButtonStyle.blurple, row=2)
+    @discord.ui.button(label="🪣 Купить лейку (50 TON)", style=discord.ButtonStyle.blurple, row=2)
     async def buy_can(self, interaction: discord.Interaction, button: discord.ui.Button):
         user = await ensure_user(interaction.user.id)
         if user["coins"] < WATERING_CAN_PRICE:
@@ -104,7 +104,7 @@ class ShopView(discord.ui.View):
             watering_cans=user["watering_cans"] + 1
         )
         await interaction.response.send_message(
-            f"🪣 **{interaction.user.display_name}** купил лейку! Баланс: {user['coins'] - WATERING_CAN_PRICE}🪙"
+            f"🪣 **{interaction.user.display_name}** купил лейку! Баланс: {user['coins'] - WATERING_CAN_PRICE} TON"
         )
 
 
@@ -118,12 +118,12 @@ class Shop(commands.Cog):
         garden = GARDENS[user["garden_type"]]
         embed = discord.Embed(title="🛒 Магазин", color=0x2ecc71)
         embed.set_author(name=interaction.user.display_name, icon_url=interaction.user.display_avatar.url)
-        embed.add_field(name="💰 Баланс", value=f"{user['coins']}🪙", inline=True)
+        embed.add_field(name="💰 Баланс", value=f"{user['coins']} TON", inline=True)
         embed.add_field(name="🏡 Огород", value=f"{garden['emoji']} {garden['name']}", inline=True)
         embed.add_field(name="🪣 Лейки", value=str(user["watering_cans"]), inline=True)
 
         seeds_text = "\n".join(
-            f"{s['emoji']} **{s['name']}** — {s['price']}🪙 | Поливов: {s['watering_needed']} | +{s['reward']}🪙"
+            f"{s['emoji']} **{s['name']}** — {s['price']} TON | Поливов: {s['watering_needed']} | +{s['reward']} TON"
             for s in SEEDS.values()
         )
         embed.add_field(name="🌰 Семена", value=seeds_text, inline=False)

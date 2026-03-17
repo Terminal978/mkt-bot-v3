@@ -1,4 +1,4 @@
-import discord
+﻿import discord
 from discord.ext import commands
 from discord import app_commands
 from config import ROLES
@@ -12,7 +12,7 @@ class RoleSelect(discord.ui.Select):
         options = []
         for role_name, data in ROLES.items():
             owned = any(r.name == role_name for r in guild.roles if r.id in member_roles)
-            label = f"{data['emoji']} {role_name} — {data['price']}🪙"
+            label = f"{data['emoji']} {role_name} — {data['price']} TON"
             if owned:
                 label = "✅ " + label
             options.append(discord.SelectOption(
@@ -40,7 +40,7 @@ class RoleSelect(discord.ui.Select):
         user = await ensure_user(interaction.user.id)
         if user["coins"] < data["price"]:
             await interaction.response.send_message(
-                f"❌ Недостаточно монет! Нужно {data['price']}🪙, у вас {user['coins']}🪙",
+                f"❌ Недостаточно монет! Нужно {data['price']} TON, у вас {user['coins']} TON",
                 ephemeral=True
             )
             return
@@ -67,7 +67,7 @@ class RoleSelect(discord.ui.Select):
 
         await interaction.response.send_message(
             f"{data['emoji']} **{interaction.user.display_name}** купил роль **{role_name}**! "
-            f"Баланс: {user['coins'] - data['price']}🪙"
+            f"Баланс: {user['coins'] - data['price']} TON"
         )
 
 
@@ -92,13 +92,13 @@ class RoleShop(commands.Cog):
 
         embed = discord.Embed(title="🎭 Магазин ролей", color=0x9b59b6)
         embed.set_author(name=interaction.user.display_name, icon_url=interaction.user.display_avatar.url)
-        embed.add_field(name="💰 Ваш баланс", value=f"{user['coins']}🪙", inline=False)
+        embed.add_field(name="💰 Ваш баланс", value=f"{user['coins']} TON", inline=False)
 
         roles_text = ""
         for role_name, data in ROLES.items():
             owned = discord.utils.get(interaction.user.roles, name=role_name)
             status = "✅" if owned else "🔒"
-            roles_text += f"{status} {data['emoji']} **{role_name}** — {data['price']}🪙\n{data['description']}\n\n"
+            roles_text += f"{status} {data['emoji']} **{role_name}** — {data['price']} TON\n{data['description']}\n\n"
 
         embed.add_field(name="Доступные роли", value=roles_text, inline=False)
         embed.set_footer(text="Роли выдаются навсегда!")

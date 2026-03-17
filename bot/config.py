@@ -2,14 +2,14 @@ import os
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 
 SEEDS = {
-    "strawberry": {"name": "Клубника",  "price": 50,  "watering_needed": 3, "emoji": "🍓", "reward": 150},
-    "watermelon": {"name": "Арбуз",     "price": 80,  "watering_needed": 5, "emoji": "🍉", "reward": 300},
-    "apple":      {"name": "Яблоко",    "price": 60,  "watering_needed": 4, "emoji": "🍎", "reward": 200},
-    "grape":      {"name": "Виноград",  "price": 70,  "watering_needed": 4, "emoji": "🍇", "reward": 250},
-    "tomato":     {"name": "Помидор",   "price": 30,  "watering_needed": 2, "emoji": "🍅", "reward": 100},
-    "carrot":     {"name": "Морковь",   "price": 20,  "watering_needed": 2, "emoji": "🥕", "reward": 80},
-    "pumpkin":    {"name": "Тыква",     "price": 90,  "watering_needed": 6, "emoji": "🎃", "reward": 350},
-    "cherry":     {"name": "Вишня",     "price": 55,  "watering_needed": 3, "emoji": "🍒", "reward": 170},
+    "strawberry": {"name": "Клубника",  "price": 50,  "watering_needed": 3, "emoji": "🍓", "reward": 400},
+    "watermelon": {"name": "Арбуз",     "price": 80,  "watering_needed": 5, "emoji": "🍉", "reward": 650},
+    "apple":      {"name": "Яблоко",    "price": 60,  "watering_needed": 4, "emoji": "🍎", "reward": 520},
+    "grape":      {"name": "Виноград",  "price": 70,  "watering_needed": 4, "emoji": "🍇", "reward": 540},
+    "tomato":     {"name": "Помидор",   "price": 30,  "watering_needed": 2, "emoji": "🍅", "reward": 220},
+    "carrot":     {"name": "Морковь",   "price": 20,  "watering_needed": 2, "emoji": "🥕", "reward": 200},
+    "pumpkin":    {"name": "Тыква",     "price": 90,  "watering_needed": 6, "emoji": "🎃", "reward": 850},
+    "cherry":     {"name": "Вишня",     "price": 55,  "watering_needed": 3, "emoji": "🍒", "reward": 420},
 }
 
 GARDENS = {
@@ -20,7 +20,7 @@ GARDENS = {
 }
 
 START_COINS = 200
-WATERING_CAN_PRICE = 50
+WATERING_CAN_PRICE = 10  # цена лейки
 DAILY_REWARD = 100  # монет за ежедневный бонус
 
 # Роли: название, цена, эмодзи (роли должны существовать на сервере с такими же именами)

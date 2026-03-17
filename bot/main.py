@@ -1,4 +1,4 @@
-import discord
+﻿import discord
 from discord.ext import commands
 import asyncio
 from config import BOT_TOKEN
@@ -32,19 +32,19 @@ async def start(interaction: discord.Interaction):
             "`/inventory` — Инвентарь\n"
             "`/profile` — Профиль\n"
             "`/roles` — Магазин ролей\n"
-            "`/daily` — Ежедневный бонус (+100🪙)\n"
+            "`/daily` — Ежедневный бонус (+100 TON)\n"
             "`/addcoins` — Выдать монеты (админ)\n"
             "`/setcoins` — Установить баланс (админ)\n\n"
             "**Как играть:**\n"
             "1. Купи семена в `/shop`\n"
             "2. Посади их в `/garden` → 🌱 Посадить\n"
             "3. Поливай грядки 💧 (нужна лейка 🪣)\n"
-            "4. Собери урожай и получи монеты 🪙\n"
+            "4. Собери урожай и получи монеты TON\n"
             "5. Расширяй огород в `/shop`!"
         ),
         color=0x2ecc71
     )
-    embed.add_field(name="💰 Стартовый баланс", value=f"{user['coins']}🪙", inline=True)
+    embed.add_field(name="💰 Стартовый баланс", value=f"{user['coins']} TON", inline=True)
     embed.add_field(name="🪣 Лейки", value=str(user["watering_cans"]), inline=True)
     await interaction.response.send_message(embed=embed)
 
