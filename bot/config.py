@@ -1,6 +1,8 @@
 import os
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 
+OWNER_ID = 1384943274917101719  # единственный кто может выдавать валюту
+
 SEEDS = {
     "strawberry": {"name": "Клубника",  "price": 50,  "watering_needed": 3, "emoji": "🍓", "reward": 400},
     "watermelon": {"name": "Арбуз",     "price": 80,  "watering_needed": 5, "emoji": "🍉", "reward": 650},

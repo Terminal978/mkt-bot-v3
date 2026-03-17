@@ -2,7 +2,7 @@
 from discord.ext import commands
 from discord import app_commands
 from datetime import datetime, date
-from config import DAILY_REWARD
+from config import DAILY_REWARD, OWNER_ID
 from database import ensure_user, update_user
 
 
@@ -10,10 +10,12 @@ class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @app_commands.command(name="addcoins", description="[Админ] Добавить монеты игроку")
+    @app_commands.command(name="addcoins", description="[Владелец] Добавить монеты игроку")
     @app_commands.describe(member="Игрок", amount="Количество монет")
-    @app_commands.checks.has_permissions(administrator=True)
     async def addcoins(self, interaction: discord.Interaction, member: discord.Member, amount: int):
+        if interaction.user.id != OWNER_ID:
+            await interaction.response.send_message("❌ У тебя нет прав на эту команду!", ephemeral=True)
+            return
         if amount == 0:
             await interaction.response.send_message("Укажи ненулевое количество монет!", ephemeral=True)
             return
@@ -36,15 +38,14 @@ class Admin(commands.Cog):
 
         await interaction.response.send_message(msg)
 
-    @addcoins.error
-    async def addcoins_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
-        if isinstance(error, app_commands.MissingPermissions):
-            await interaction.response.send_message("❌ Только администраторы могут использовать эту команду!", ephemeral=True)
 
-    @app_commands.command(name="setcoins", description="[Админ] Установить баланс игроку")
+
+    @app_commands.command(name="setcoins", description="[Владелец] Установить баланс игроку")
     @app_commands.describe(member="Игрок", amount="Новый баланс")
-    @app_commands.checks.has_permissions(administrator=True)
     async def setcoins(self, interaction: discord.Interaction, member: discord.Member, amount: int):
+        if interaction.user.id != OWNER_ID:
+            await interaction.response.send_message("❌ У тебя нет прав на эту команду!", ephemeral=True)
+            return
         if amount < 0:
             await interaction.response.send_message("Баланс не может быть отрицательным!", ephemeral=True)
             return
@@ -55,10 +56,7 @@ class Admin(commands.Cog):
             f"💰 **{interaction.user.display_name}** установил баланс **{member.display_name}** → **{amount} TON**"
         )
 
-    @setcoins.error
-    async def setcoins_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
-        if isinstance(error, app_commands.MissingPermissions):
-            await interaction.response.send_message("❌ Только администраторы могут использовать эту команду!", ephemeral=True)
+
 
     @app_commands.command(name="daily", description="Получить ежедневный бонус")
     async def daily(self, interaction: discord.Interaction):
