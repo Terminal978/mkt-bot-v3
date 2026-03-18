@@ -5,6 +5,8 @@ import traceback
 from config import BOT_TOKEN
 from database import init_db
 
+print("=== Бот запускается ===", flush=True)
+
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -52,4 +54,5 @@ async def start(interaction: discord.Interaction):
 try:
     asyncio.run(bot.start(BOT_TOKEN))
 except Exception as e:
+    print(f"FATAL ERROR: {e}", flush=True)
     traceback.print_exc()
