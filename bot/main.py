@@ -2,10 +2,25 @@
 from discord.ext import commands
 import asyncio
 import traceback
+import os
+from aiohttp import web
 from config import BOT_TOKEN
 from database import init_db
 
 print("=== Бот запускается ===", flush=True)
+
+async def health(request):
+    return web.Response(text="OK")
+
+async def start_web():
+    app = web.Application()
+    app.router.add_get("/", health)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    port = int(os.environ.get("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    print(f"Health server on port {port}", flush=True)
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -52,7 +67,9 @@ async def start(interaction: discord.Interaction):
     await interaction.response.send_message(embed=embed)
 
 try:
-    asyncio.run(bot.start(BOT_TOKEN))
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(start_web())
+    loop.run_until_complete(bot.start(BOT_TOKEN))
 except Exception as e:
     print(f"FATAL ERROR: {e}", flush=True)
     traceback.print_exc()
