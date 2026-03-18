@@ -66,10 +66,12 @@ async def start(interaction: discord.Interaction):
     embed.add_field(name="🪣 Лейки", value=str(user["watering_cans"]), inline=True)
     await interaction.response.send_message(embed=embed)
 
-try:
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(start_web())
-    loop.run_until_complete(bot.start(BOT_TOKEN))
-except Exception as e:
-    print(f"FATAL ERROR: {e}", flush=True)
-    traceback.print_exc()
+async def main():
+    await start_web()
+    try:
+        await bot.start(BOT_TOKEN)
+    except Exception as e:
+        print(f"FATAL ERROR: {e}", flush=True)
+        traceback.print_exc()
+
+asyncio.run(main())
