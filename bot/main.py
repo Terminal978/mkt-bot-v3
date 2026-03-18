@@ -28,8 +28,17 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print("on_ready fired", flush=True)
-    await init_db()
-    print("DB initialized", flush=True)
+    try:
+        await asyncio.wait_for(init_db(), timeout=10)
+        print("DB initialized", flush=True)
+    except asyncio.TimeoutError:
+        print("ERROR: DB connection timeout! Check DATABASE_URL", flush=True)
+        db_url = os.environ.get("DATABASE_URL", "NOT SET")
+        print(f"DATABASE_URL starts with: {db_url[:30]}", flush=True)
+        return
+    except Exception as e:
+        print(f"ERROR: DB init failed: {e}", flush=True)
+        return
     await bot.load_extension("cogs.shop")
     await bot.load_extension("cogs.garden")
     await bot.load_extension("cogs.inventory")
