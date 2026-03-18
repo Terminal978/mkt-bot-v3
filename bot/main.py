@@ -1,6 +1,7 @@
 ﻿import discord
 from discord.ext import commands
 import asyncio
+import traceback
 from config import BOT_TOKEN
 from database import init_db
 
@@ -48,4 +49,7 @@ async def start(interaction: discord.Interaction):
     embed.add_field(name="🪣 Лейки", value=str(user["watering_cans"]), inline=True)
     await interaction.response.send_message(embed=embed)
 
-asyncio.run(bot.start(BOT_TOKEN))
+try:
+    asyncio.run(bot.start(BOT_TOKEN))
+except Exception as e:
+    traceback.print_exc()
