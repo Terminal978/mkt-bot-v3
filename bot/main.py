@@ -27,14 +27,17 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
+    print("on_ready fired", flush=True)
     await init_db()
+    print("DB initialized", flush=True)
     await bot.load_extension("cogs.shop")
     await bot.load_extension("cogs.garden")
     await bot.load_extension("cogs.inventory")
     await bot.load_extension("cogs.roles")
     await bot.load_extension("cogs.admin")
+    print("Cogs loaded", flush=True)
     synced = await bot.tree.sync()
-    print(f"✅ Бот запущен: {bot.user} | Синхронизировано команд: {len(synced)}")
+    print(f"Bot ready: {bot.user} | Commands synced: {len(synced)}", flush=True)
 
 @bot.tree.command(name="start", description="Начать играть в огород-бот")
 async def start(interaction: discord.Interaction):
