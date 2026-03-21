@@ -92,7 +92,7 @@ class ShopView(discord.ui.View):
         self.add_item(SeedSelect(user_id))
         self.add_item(GardenSelect(user_id, current_garden))
 
-    @discord.ui.button(label="🪣 Купить лейку (50 TON)", style=discord.ButtonStyle.blurple, row=2)
+    @discord.ui.button(label="🪣 Купить лейку (10 TON)", style=discord.ButtonStyle.blurple, row=2)
     async def buy_can(self, interaction: discord.Interaction, button: discord.ui.Button):
         user = await ensure_user(interaction.user.id)
         if user["coins"] < WATERING_CAN_PRICE:
