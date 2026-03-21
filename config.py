@@ -20,12 +20,12 @@ GARDENS = {
 }
 
 START_COINS = 200
-WATERING_CAN_PRICE = 50
+WATERING_CAN_PRICE = 10
 DAILY_REWARD = 100  # монет за ежедневный бонус
 
 # Роли: название, цена, эмодзи (роли должны существовать на сервере с такими же именами)
 ROLES = {
     "OLD":         {"price": 1500, "emoji": "✨", "description": "Самый старый игрок клана MKT."},
-    "Dungeon Master":  {"price": 3000, "emoji": "🏆", "description": "Мастер своего дела"},
+    "Фермер":  {"price": 3000, "emoji": "🏆", "description": "Легендарный фермер клана."},
     "Exclusive": {"price": 6000, "emoji": "👑", "description": "Легенда сервера"},
 }

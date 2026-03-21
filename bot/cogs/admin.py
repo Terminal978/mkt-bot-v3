@@ -2,7 +2,7 @@
 from discord.ext import commands
 from discord import app_commands
 from datetime import datetime, date
-from config import DAILY_REWARD, OWNER_ID
+from config import DAILY_REWARD, OWNER_ID, ROLES
 from database import ensure_user, update_user
 
 
@@ -76,6 +76,42 @@ class Admin(commands.Cog):
         await interaction.response.send_message(
             f"🎁 **{interaction.user.display_name}** получил ежедневный бонус: **+{DAILY_REWARD} TON**! "
             f"Баланс: {new_balance} TON"
+        )
+
+
+    @app_commands.command(name="push", description="[Владелец] Выдать роль Фермер участнику")
+    @app_commands.describe(member="Участник, которому выдать роль")
+    async def push(self, interaction: discord.Interaction, member: discord.Member):
+        if interaction.user.id != OWNER_ID:
+            await interaction.response.send_message("❌ У тебя нет прав на эту команду!", ephemeral=True)
+            return
+
+        role_name = "Фермер"
+        role_data = ROLES[role_name]
+
+        existing = discord.utils.get(member.roles, name=role_name)
+        if existing:
+            await interaction.response.send_message(
+                f"⚠️ У **{member.display_name}** уже есть роль **{role_name}**!", ephemeral=True
+            )
+            return
+
+        role = discord.utils.get(interaction.guild.roles, name=role_name)
+        if not role:
+            await interaction.response.send_message(
+                f"❌ Роль **{role_name}** не найдена на сервере. Создайте её вручную.", ephemeral=True
+            )
+            return
+
+        if interaction.guild.me.top_role <= role:
+            await interaction.response.send_message(
+                "❌ Роль бота должна быть выше роли Фермер в иерархии.", ephemeral=True
+            )
+            return
+
+        await member.add_roles(role, reason=f"Выдано командой /push от {interaction.user}")
+        await interaction.response.send_message(
+            f"{role_data['emoji']} **{member.display_name}** получил роль **{role_name}**!"
         )
 
 

@@ -35,6 +35,6 @@ DAILY_REWARD = 100  # монет за ежедневный бонус
 # Роли: название, цена, эмодзи (роли должны существовать на сервере с такими же именами)
 ROLES = {
     "OLD":         {"price": 1500, "emoji": "✨", "description": "Самый старый игрок клана MKT."},
-    "Dungeon Master":  {"price": 3000, "emoji": "🏆", "description": "Мастер своего дела"},
-    "Exclusive": {"price": 6000, "emoji": "👑", "description": "Легенда сервера"},
+    "Фермер":  {"price": 3000, "emoji": "🏆", "description": "Легендарный фермер клана."},
+    "Exclusive": {"price": 6000, "emoji": "👑", "description": "Легенда сервера."},
 }
