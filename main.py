@@ -50,10 +50,12 @@ async def on_ready():
             print(f"ERROR loading {cog}: {e}", flush=True)
             traceback.print_exc()
     print("Cogs loaded", flush=True)
-    synced = await bot.tree.sync()
     guild = discord.Object(id=1435654166306488402)
     bot.tree.copy_global_to(guild=guild)
-    await bot.tree.sync(guild=guild)
+    synced = await bot.tree.sync(guild=guild)
+    # Очищаем глобальные команды
+    bot.tree.clear_commands(guild=None)
+    await bot.tree.sync()
     print(f"Bot ready: {bot.user} | Commands synced: {len(synced)}", flush=True)
 
 @bot.tree.command(name="start", description="Начать играть в огород-бот")
