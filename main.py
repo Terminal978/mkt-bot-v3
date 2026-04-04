@@ -3,9 +3,13 @@ from discord.ext import commands
 import asyncio
 import traceback
 import os
+import sys
 from aiohttp import web
 from config import BOT_TOKEN
 from database import init_db
+
+# Добавляем папку bot в путь поиска модулей
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "bot"))
 
 print("=== Бот запускается ===", flush=True)
 
