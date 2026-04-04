@@ -1,7 +1,8 @@
 import aiosqlite
 import json
+import os
 
-DB_PATH = "garden_bot.db"
+DB_PATH = os.path.join(os.environ.get("DATA_DIR", "/app/data"), "garden_bot.db")
 
 async def init_db():
     async with aiosqlite.connect(DB_PATH) as db:
@@ -16,11 +17,6 @@ async def init_db():
                 last_daily TEXT DEFAULT NULL
             )
         """)
-        # Добавить колонку если таблица уже существует
-        try:
-            await db.execute("ALTER TABLE users ADD COLUMN last_daily TEXT DEFAULT NULL")
-        except Exception:
-            pass
         await db.commit()
 
 async def get_user(user_id: int) -> dict | None:
