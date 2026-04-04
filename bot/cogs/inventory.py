@@ -11,6 +11,7 @@ class Inventory(commands.Cog):
 
     @app_commands.command(name="inventory", description="Посмотреть инвентарь")
     async def inventory(self, interaction: discord.Interaction):
+        await interaction.response.defer()
         user = await ensure_user(interaction.user.id)
         garden = GARDENS[user["garden_type"]]
 
@@ -42,10 +43,9 @@ class Inventory(commands.Cog):
             inline=False
         )
 
-        await interaction.response.send_message(embed=embed)
-
-    @app_commands.command(name="profile", description="Посмотреть профиль")
+        await interaction.followup.send(embed=embed)
     async def profile(self, interaction: discord.Interaction):
+        await interaction.response.defer()
         user = await ensure_user(interaction.user.id)
         garden = GARDENS[user["garden_type"]]
         plots = user["plots"]
@@ -61,7 +61,7 @@ class Inventory(commands.Cog):
         embed.add_field(name="🌰 Семян в инвентаре", value=str(total_seeds), inline=True)
         embed.add_field(name="🏡 Огород", value=f"{garden['emoji']} {garden['name']} ({len(plots)} грядок)", inline=False)
 
-        await interaction.response.send_message(embed=embed)
+        await interaction.followup.send(embed=embed)
 
 
 async def setup(bot):

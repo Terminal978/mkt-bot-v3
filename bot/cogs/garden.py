@@ -203,8 +203,8 @@ class Garden(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @app_commands.command(name="garden", description="Посмотреть свой огород")
-    async def garden(self, interaction: discord.Interaction):
+    @app_commands.allowed_installs(guilds=True, users=True)
+    @app_commands.allowed_contexts(guilds=Tcord.Interaction):
         user = await ensure_user(interaction.user.id)
         embed = discord.Embed(
             title="🌾 Огород",

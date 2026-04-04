@@ -86,7 +86,7 @@ class RoleShop(commands.Cog):
         if not interaction.guild:
             await interaction.response.send_message("Эта команда работает только на сервере!", ephemeral=True)
             return
-
+        await interaction.response.defer()
         user = await ensure_user(interaction.user.id)
         member_role_ids = [r.id for r in interaction.user.roles]
 
@@ -103,7 +103,7 @@ class RoleShop(commands.Cog):
         embed.add_field(name="Доступные роли", value=roles_text, inline=False)
         embed.set_footer(text="Роли выдаются навсегда!")
 
-        await interaction.response.send_message(
+        await interaction.followup.send(
             embed=embed,
             view=RoleShopView(interaction.user.id, interaction.guild, member_role_ids)
         )
