@@ -114,6 +114,7 @@ class Shop(commands.Cog):
 
     @app_commands.command(name="shop", description="Открыть магазин семян и огородов")
     async def shop(self, interaction: discord.Interaction):
+        await interaction.response.defer()
         user = await ensure_user(interaction.user.id)
         garden = GARDENS[user["garden_type"]]
         embed = discord.Embed(title="🛒 Магазин", color=0x2ecc71)
@@ -128,7 +129,7 @@ class Shop(commands.Cog):
         )
         embed.add_field(name="🌰 Семена", value=seeds_text, inline=False)
 
-        await interaction.response.send_message(
+        await interaction.followup.send(
             embed=embed,
             view=ShopView(interaction.user.id, user["garden_type"])
         )
