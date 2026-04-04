@@ -38,11 +38,13 @@ async def on_ready():
         print(f"ERROR: DB init failed: {e}", flush=True)
         traceback.print_exc()
         return
-    await bot.load_extension("cogs.shop")
-    await bot.load_extension("cogs.garden")
-    await bot.load_extension("cogs.inventory")
-    await bot.load_extension("cogs.roles")
-    await bot.load_extension("cogs.admin")
+    for cog in ["cogs.shop", "cogs.garden", "cogs.inventory", "cogs.roles", "cogs.admin"]:
+        try:
+            await bot.load_extension(cog)
+            print(f"Loaded {cog}", flush=True)
+        except Exception as e:
+            print(f"ERROR loading {cog}: {e}", flush=True)
+            traceback.print_exc()
     print("Cogs loaded", flush=True)
     synced = await bot.tree.sync()
     print(f"Bot ready: {bot.user} | Commands synced: {len(synced)}", flush=True)
