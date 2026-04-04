@@ -203,8 +203,9 @@ class Garden(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @app_commands.allowed_installs(guilds=True, users=True)
-    @app_commands.allowed_contexts(guilds=Tcord.Interaction):
+    @app_commands.command(name="garden", description="Открыть огород")
+    async def garden(self, interaction: discord.Interaction):
+        await interaction.response.defer()
         user = await ensure_user(interaction.user.id)
         embed = discord.Embed(
             title="🌾 Огород",
@@ -213,7 +214,7 @@ class Garden(commands.Cog):
         )
         embed.set_author(name=interaction.user.display_name, icon_url=interaction.user.display_avatar.url)
         embed.set_footer(text=f"💰 {user['coins']} TON | 🪣 Леек: {user['watering_cans']}")
-        await interaction.response.send_message(
+        await interaction.followup.send(
             embed=embed,
             view=GardenView(interaction.user.id, user["plots"], user["inventory"])
         )
