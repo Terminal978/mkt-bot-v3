@@ -37,4 +37,5 @@ ROLES = {
     "OLD":         {"price": 1500, "emoji": "✨", "description": "Самый старый игрок клана MKT."},
     "Фермер":  {"price": 3000, "emoji": "🏆", "description": "Легендарный фермер клана."},
     "Exclusive": {"price": 6000, "emoji": "👑", "description": "Легенда сервера."},
+    "Зайчик": {"price": 9000, "emoji": "👑", "description": "Пасха 2026."},
 }
