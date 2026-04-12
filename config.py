@@ -18,6 +18,7 @@ SEEDS = {
     "coconut":    {"name": "Кокос",          "price": 350,  "watering_needed": 7,  "emoji": "🥥", "reward": 2100},
     "passion":    {"name": "Маракуйя",       "price": 450,  "watering_needed": 8,  "emoji": "🌺", "reward": 2700},
     "truffle":    {"name": "Трюфель",        "price": 800,  "watering_needed": 10, "emoji": "🍄", "reward": 5000},
+    "egg":    {"name": "Пасхальное яйцо",        "price": 1500,  "watering_needed": 11, "emoji": "🥚", "reward": 5100},
 }
 
 GARDENS = {
