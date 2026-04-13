@@ -40,22 +40,6 @@ class Admin(commands.Cog):
 
 
 
-    @app_commands.command(name="setcoins", description="[Владелец] Установить баланс игроку")
-    @app_commands.describe(member="Игрок", amount="Новый баланс")
-    async def setcoins(self, interaction: discord.Interaction, member: discord.Member, amount: int):
-        if interaction.user.id != OWNER_ID:
-            await interaction.response.send_message("❌ У тебя нет прав на эту команду!", ephemeral=True)
-            return
-        if amount < 0:
-            await interaction.response.send_message("Баланс не может быть отрицательным!", ephemeral=True)
-            return
-        await interaction.response.defer()
-        await ensure_user(member.id)
-        await update_user(member.id, coins=amount)
-        await interaction.followup.send(
-            f"💰 **{interaction.user.display_name}** установил баланс **{member.display_name}** → **{amount} TON**"
-        )
-
 
 
     @app_commands.command(name="daily", description="Получить ежедневный бонус")

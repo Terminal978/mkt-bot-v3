@@ -18,7 +18,6 @@ SEEDS = {
     "coconut":    {"name": "Кокос",          "price": 350,  "watering_needed": 7,  "emoji": "🥥", "reward": 2100},
     "passion":    {"name": "Маракуйя",       "price": 450,  "watering_needed": 8,  "emoji": "🌺", "reward": 2700},
     "truffle":    {"name": "Трюфель",        "price": 800,  "watering_needed": 10, "emoji": "🍄", "reward": 5000},
-    "egg":    {"name": "Пасхальное яйцо",        "price": 1500,  "watering_needed": 11, "emoji": "🥚", "reward": 5100},
 }
 
 GARDENS = {
@@ -36,5 +35,4 @@ ROLES = {
     "OLD":       {"price": 1500, "emoji": "✨", "description": "Самый старый игрок клана MKT."},
     "Фермер":    {"price": 3000, "emoji": "🏆", "description": "Легендарный фермер клана."},
     "Exclusive": {"price": 6000, "emoji": "👑", "description": "Легенда сервера."},
-    "Зайчик": {"price": 9000, "emoji": "👑", "description": "Пасха 2026."},
 }
